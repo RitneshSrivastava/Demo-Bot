@@ -1,0 +1,113 @@
+<div id="chatbot">
+  <div id="conversation">
+    <!-- Conversation history will be displayed here -->
+  </div>
+  <div id="input">
+    <input type="text" placeholder="Enter your message here">
+    <button id="send">Send</button>
+  </div>
+</div>
+
+<style>
+  #chatbot {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  #conversation {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  #conversation p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  #input {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+
+  #input input[type="text"] {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  #input button {
+    width: 80px;
+    height: 100%;
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #send:hover {
+    background-color: #3e8e41;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #chatbot {
+      width: 90%;
+    }
+
+    #conversation p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<script>
+  function getJSON(url) {
+    return fetch(url)
+      .then(response => response.json())
+      .catch(error => console.error(error));
+  }
+
+  function handleConversation(message, data) {
+    // Find the appropriate response
+    // (you can implement this part however you like)
+    const response = data.responses[message];
+
+    // Return the response
+    return response;
+  }
+
+  const url = 'https://https://portfolio.riturajps.in/trash/chat.json';
+
+  getJSON(url).then(data => {
+    const sendButton = document.querySelector('#send');
+    sendButton.addEventListener('click', () => {
+      // Get the user's message
+      const inputField = document.querySelector('#input input[type="text"]');
+      const message = inputField.value;
+
+      // Handle the conversation
+      const response = handleConversation(message, data);
+
+      // Display the response
+      const conversation = document.querySelector('#conversation');
+      conversation.innerHTML += `<p><strong>Bot:</strong>${response}</p>`;
+
+      // Clear the input field
+      inputField.value = '';
+    });
+  });
+</script>
+
