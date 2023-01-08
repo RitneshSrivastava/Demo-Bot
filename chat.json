@@ -1,6 +1,7 @@
 {
   "responses": {
     "hello": "Hello! How are you?",
+    "Hello": "Hello! How are you?",
     "good morning": "Good morning! How can I help you today?",
     "what is your name?": "My name is Chatbot. Nice to meet you!",
     "default": "I'm sorry, I didn't understand your message. Could you please rephrase that?"
